@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite Cosmetics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Fortnite Cosmetics</h1>
+    <div class="buttons">
+        <button onclick="loadCosmetics('skins')">Skins</button>
+        <button onclick="loadCosmetics('backpacks')">Backpacks</button>
+        <button onclick="loadCosmetics('pickaxes')">Pickaxes</button>
+        <button onclick="loadCosmetics('gestures')">Dances</button>
+        <button onclick="loadCosmetics('gliders')">Gliders</button>
+        <button onclick="loadCosmetics('wraps')">Wrappers</button>
+        <button onclick="loadCosmetics('sprays')">Sprays</button>
+        <button onclick="loadCosmetics('trails')">Trails</button>
+        <button onclick="loadCosmetics('emojis')">Emojis</button>
+        <button onclick="loadCosmetics('toys')">Toys</button>
+        <button onclick="loadCosmetics('music')">Music</button>
+        <button onclick="loadCosmetics('loading')">Loading Screens</button>
+
+        <button class="contact-button" onclick="openModal()">Contact</button>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th class="image-cell">Image</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Length</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody id="cosmetics-table-body">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Contact Information</h2>
+            <div class="social-links">
+                <a href="https://instagram.com/Kayy_FN_" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                    Kayy_FN_
+                </a>
+                <a href="https://discord.com/users/1291162796796411969" target="_blank">
+                    <img src="https://static.vecteezy.com/system/resources/previews/006/892/625/non_2x/discord-logo-icon-editorial-free-vector.jpg" alt="Discord">
+                    kayysitooo
+                </a>
+                <a href="https://github.com/Kayy9961" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+                    Kayy9961
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchCosmetics(type) {
+            const tableBody = document.getElementById('cosmetics-table-body');
+            tableBody.innerHTML = '';
+
+            try {
+                const response = await fetch('https://fortnite-api.com/v2/cosmetics/br');
+                const data = await response.json();
+
+                if (data.status === 200 && data.data) {
+                    const cosmetics = data.data;
+
+                    let filteredCosmetics = [];
+                    if (type === 'skins') {
+                        const cidSkins = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('cid'));
+                        const characterSkins = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('character_'));
+                        filteredCosmetics = [...cidSkins, ...characterSkins];
+                    } else if (type === 'backpacks') {
+                        const bidBackpacks = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('bid_'));
+                        const namedBackpacks = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('backpack'));
+                        filteredCosmetics = [...bidBackpacks, ...namedBackpacks];
+                    } else if (type === 'pickaxes') {
+                        filteredCosmetics = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('pickaxe_'));
+                    } else if (type === 'gestures') {
+                        filteredCosmetics = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('eid'));
+                    } else if (type === 'gliders') {
+                        filteredCosmetics = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('glider'));
+                    } else if (type === 'wraps') {
+                        filteredCosmetics = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('wrap'));
+                    } else if (type === 'sprays') {
+                        filteredCosmetics = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('spray'));
+                    } else if (type === 'trails') {
+                        filteredCosmetics = cosmetics.filter(cosmetic => 
+                            cosmetic.id?.toLowerCase().startsWith('contrail_') || 
+                            cosmetic.id?.toLowerCase().startsWith('trails_id_')
+                        );
+                    } else if (type === 'emojis') {
+                        filteredCosmetics = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('emoji_'));
+                    } else if (type === 'toys') {
+                        filteredCosmetics = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('toy_'));
+                    } else if (type === 'music') {
+                        filteredCosmetics = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('musicpack_'));
+                    } else if (type === 'loading') {
+                        filteredCosmetics = cosmetics.filter(cosmetic => cosmetic.id?.toLowerCase().startsWith('lsid_'));
+                    }
+
+                    let counter = 1;
+                    filteredCosmetics.forEach(cosmetic => {
+                        const row = document.createElement('tr');
+
+                        const numberCell = document.createElement('td');
+                        numberCell.textContent = counter++;
+                        row.appendChild(numberCell);
+
+                        const imageCell = document.createElement('td');
+                        imageCell.classList.add('image-cell');
+                        const img = document.createElement('img');
+                        img.src = (type === 'emojis'
+                            ? `https://fortnite-api.com/images/cosmetics/br/${cosmetic.id}/smallicon.png`
+                            : cosmetic.images?.icon) || '';
+                        img.alt = cosmetic.name || 'No image available';
+                        imageCell.appendChild(img);
+                        row.appendChild(imageCell);
+
+                        const idCell = document.createElement('td');
+                        idCell.textContent = cosmetic.id || 'Unknown';
+                        row.appendChild(idCell);
+
+                        const nameCell = document.createElement('td');
+                        nameCell.textContent = cosmetic.name || 'Unknown';
+                        row.appendChild(nameCell);
+
+                        const lengthCell = document.createElement('td');
+                        lengthCell.textContent = cosmetic.id ? cosmetic.id.length : 0;
+                        row.appendChild(lengthCell);
+
+                        const descriptionCell = document.createElement('td');
+                        descriptionCell.textContent = cosmetic.description || 'Sin descripción';
+                        row.appendChild(descriptionCell);
+
+                        tableBody.appendChild(row);
+                    });
+                } else {
+                    tableBody.innerHTML = '<tr><td colspan="6">Failed to load cosmetics.</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error fetching cosmetics:', error);
+                tableBody.innerHTML = '<tr><td colspan="6">An error occurred while fetching data.</td></tr>';
+            }
+        }
+
+        function loadCosmetics(type) {
+            fetchCosmetics(type);
+        }
+
+        loadCosmetics('skins');
+        function openModal() {
+            document.getElementById('contactModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
