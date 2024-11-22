@@ -1,18 +1,19 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background: #121212;
-    color: #fff;
+    background: #121212; 
+    color: #fff; 
 }
 
 .table-wrapper {
     position: relative;
-    display: inline-block;
-    border-radius: 10px;
-    padding: 4px;
-    border: 4px solid red;
+    display: inline-block; 
+    border-radius: 10px; 
+    padding: 4px; 
+    border: 4px solid red; 
     animation: borderColorChange 15s linear infinite;
 }
+
 
 @keyframes borderColorChange {
     0% { border-color: red; }
@@ -27,16 +28,18 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    background: rgba(31, 31, 31, 0.95);
-    color: #ddd;
+    background: rgba(31, 31, 31, 0.95); 
+    color: #ddd; 
     border-radius: 10px;
-    overflow: hidden;
+    overflow: hidden;/
+
 }
 
+
 th {
-    background-color: #1f1f1f;
-    color: #f2f2f2;
-    text-transform: uppercase;
+    background-color: #1f1f1f; 
+    color: #f2f2f2; 
+    text-transform: uppercase; 
     padding: 10px;
 }
 
@@ -44,27 +47,29 @@ td {
     padding: 10px;
     text-align: center;
     vertical-align: middle;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease; 
 }
 
+
 tr:nth-child(odd) {
-    background-color: #1a1a1a;
+    background-color: #1a1a1a; 
 }
 
 tr:nth-child(even) {
-    background-color: #222;
+    background-color: #222; 
 }
 
 tr:hover {
     background-color: #333;
 }
 
+
 td img {
     display: inline-block;
     margin: 0;
     padding: 0;
-    max-width: 90px;
-    height: auto;
+    max-width: 90px; 
+    height: auto; 
 }
 
 td {
@@ -78,92 +83,78 @@ td {
 
 .buttons {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
 }
 
 .buttons button {
-    background-color: #1f1f1f;
+    background-color: #1f1f1f; 
     color: #f2f2f2;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: bold; 
     cursor: pointer;
     border-radius: 10px;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 0 10px 3px rgb(255, 0, 200);
-    margin: 5px;
+    box-shadow: 0 0 10px 3px rgb(255, 0, 200); 
+    margin: 5px; 
 }
 
 .buttons button:hover {
-    background-color: rgb(255, 0, 234);
-    color: #fff;
-    transform: scale(1.1);
-    box-shadow: 0 0 15px 5px red;
+    background-color: rgb(255, 0, 234); 
+    color: #fff; 
+    transform: scale(1.1); 
+    box-shadow: 0 0 15px 5px red; 
 }
 
+
 .buttons .contact-button {
-    background-color: transparent;
-    color: yellow;
-    border: 2px solid yellow;
+    background-color: transparent; 
+    color: yellow; 
+    border: 2px solid yellow; 
     box-shadow: 0 0 10px 3px yellow;
 }
 
 .buttons .contact-button:hover {
-    background-color: rgba(255, 255, 0, 0.2);
-    color: #fff;
-    transform: scale(1.1);
+    background-color: rgba(255, 255, 0, 0.2); 
+    color: #fff; 
+    transform: scale(1.1); 
     box-shadow: 0 0 15px 5px yellow;
 }
 
 h1 {
     text-align: center;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    color: #fff;
-}
-
-.visitor-counter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px 0;
-    font-size: 20px;
-    color: #fff;
-}
-
-.visitor-icon {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); 
+    color: #fff; 
 }
 
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.8); 
 }
 
 .modal-content {
     background-color: #1f1f1f;
-    margin: 10% auto;
+    margin: 10% auto; 
     padding: 20px;
-    border: 2px solid blue;
+    border: 2px solid blue; 
     width: 80%;
-    max-width: 500px;
+    max-width: 500px; 
     border-radius: 10px;
     position: relative;
     color: #fff;
-    box-shadow: 0 0 10px 3px blue;
+    box-shadow: 0 0 10px 3px blue; 
 }
 
 .modal-content h2 {
-    text-align: center;
+    text-align: center; 
     margin-bottom: 20px;
 }
 
@@ -204,7 +195,7 @@ h1 {
 }
 
 .social-links a:hover {
-    color: rgb(255, 0, 234);
+    color: rgb(255, 0, 234); 
 }
 
 .social-links img {
@@ -214,22 +205,12 @@ h1 {
 
 @media (max-width: 600px) {
     .table-wrapper {
-        padding: 2px;
-        border-width: 2px;
+        padding: 2px; 
+        border-width: 2px; 
     }
 
     .modal-content {
         width: 90%;
         margin: 20% auto;
-    }
-
-    .visitor-counter {
-        font-size: 18px;
-    }
-
-    .visitor-icon {
-        width: 25px;
-        height: 25px;
-        margin-right: 8px;
     }
 }
